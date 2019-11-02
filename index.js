@@ -1,6 +1,8 @@
 var linebot = require('linebot');
 var express = require('express');
 
+
+
 var bot = linebot({
   channelId: "1557416590",
   channelSecret: "edf9605a7a0c4b7488c1a46d7ab080a4",
@@ -11,11 +13,37 @@ bot.on('message', function (event) {
   // event.message.text是使用者傳給bot的訊息
   // 使用event.reply(要回傳的訊息)方法可將訊息回傳給使用者
   if(event.message.text == "save"){
-    event.reply(event.source.userId).then(function (data) {
-      // 當訊息成功回傳後的處理
-    }).catch(function (error) {
-      // 當訊息回傳失敗後的處理
-    });
+    var app=express();
+    app.get('/',function(req,res){
+      var sql=require('mssql');
+     //config for your database
+      var config={
+         user:'sa',
+         password:'Jj0933832529',
+         server:'114.34.163.53\MSMS,1433',   //這邊要注意一下!!
+         database:'missDB'
+      };
+      
+     //connect to your database
+      sql.connect(config,function (err) {
+        if(err) console.log(err);
+      
+     //create Request object
+        var request=new sql.Request();
+        request.query("update EmployeeV2Tbl SET Renark ='"+event.source.userId+"' where EmployeeID = 'MT-108007' and status = 1;",function(err,recordset){
+        if(err) console.log(err);
+        res.send(recordset);
+        //
+          event.reply("OK").then(function (data) {
+          // 當訊息成功回傳後的處理
+          }).catch(function (error) {
+          // 當訊息回傳失敗後的處理
+          });
+        });
+      });
+      
+     });
+
   }
   
 });

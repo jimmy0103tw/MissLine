@@ -9,7 +9,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
-    "linebot": "^1.4.1"
+    "linebot": "^1.4.1",
+    "mssql": "^5.1.0"
   },
   "version": "1.0.0",
   "devDependencies": {},
