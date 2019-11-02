@@ -7,9 +7,15 @@ var bot = linebot({
   channelAccessToken: "tAkfDq/up8OgpkbEV5/QINmy/n5ySr8IkD8k/dveGf96Ocgd9GfsvTYq6hAXkl3cX1Tolu9TM5/vJchfueNW2NObIO85cC9oRecv0T6arq0KZ51PAECyZZsRXpIeSL1bGBhsfQKw+ho8pyLYiAZu9wdB04t89/1O/w1cDnyilFU="
 });
 
-bot.on('message', function(event) {
-    console.log(event); //把收到訊息的 event 印出來看看
+bot.on('message', function (event) {
+  // event.message.text是使用者傳給bot的訊息
+  // 使用event.reply(要回傳的訊息)方法可將訊息回傳給使用者
+  event.reply(event.message.text).then(function (data) {
+    // 當訊息成功回傳後的處理
+  }).catch(function (error) {
+    // 當訊息回傳失敗後的處理
   });
+});
   
   const app = express();
   const linebotParser = bot.parser();
