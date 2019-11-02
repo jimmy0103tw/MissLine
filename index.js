@@ -10,11 +10,14 @@ var bot = linebot({
 bot.on('message', function (event) {
   // event.message.text是使用者傳給bot的訊息
   // 使用event.reply(要回傳的訊息)方法可將訊息回傳給使用者
-  event.reply(event.message.text).then(function (data) {
-    // 當訊息成功回傳後的處理
-  }).catch(function (error) {
-    // 當訊息回傳失敗後的處理
-  });
+  if(event.message.text == "save"){
+    event.reply(event.source.userId).then(function (data) {
+      // 當訊息成功回傳後的處理
+    }).catch(function (error) {
+      // 當訊息回傳失敗後的處理
+    });
+  }
+  
 });
   
   const app = express();
